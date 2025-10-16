@@ -1,12 +1,16 @@
 #+title: Lindenmayer Graphs: An Approach to Structured Random Graph Generation
 #+OPTIONS: tex:t
 
-This is the repository for results in the paper *Lindenmayer Graphs: An Approach to Structured Random Graph Generation*. This repository contains the following programs in the *C* programming language. This has three sections: First, we show the core statistical properties that can be generated with this approach; Second, we show structural properties of generation algorithms, highlighting the fact that because of the string rewrite formulation is CR Confluent, parallel operations can be done, and a d-cfl exists. Finally, we use the framework in an abstract manner to formulate two problems: Stochastic Block Models (SBM), and Block Two-Level ER Models (BTER). We terminate this with providing a scale-free model that is optimised to compare fairly under the same restricted set of assumptions from papers in the literature.
+This is the repository for the applied results in the paper,
+
+~Lindenmayer Graphs: An Approach to Structured Random Graph Generation~
+
+This repository contains the following programs in the *C* programming language. This has three sections: First, we show the core statistical properties that can be generated with this approach; Second, we show structural properties of generation algorithms, highlighting the fact that because of the string rewrite formulation is CR Confluent, parallel operations can be done, and a d-cfl exists. Finally, we use the framework in an abstract manner to formulate two problems: Stochastic Block Models (SBM), and Block Two-Level ER Models (BTER). We terminate this with providing a scale-free model that is optimised to compare fairly under the same restricted set of assumptions from papers in the literature.
 
 ** Statistical Models
-- scale-free networks [[./sf/makefile][makefile]] (Takes $n,d,\alpha,\beta$, as parameters)
-- small-world networks [[./sw/makefile][makefile]] (Takes $p$)
-- Erd\H{o}s-R\'enyi networks [[./er/makefile][makefile]] (Takes $p$)
+- scale-free networks [[./stats/sf/makefile][makefile]] (Takes $n,d,\alpha,\beta$, as parameters)
+- small-world networks [[./stats/sw/makefile][makefile]] (Takes $p$)
+- Erd\H{o}s-R\'enyi networks [[./stats/er/makefile][makefile]] (Takes $p$)
 ** Structural Models
 - Spanning Trees [[./struc/st/makefile][makefile]]
 - Complete Graphs [[./struc/cg/makefile][makefile]]
@@ -19,6 +23,9 @@ This is the repository for results in the paper *Lindenmayer Graphs: An Approach
 
 * Benchmarking Algorithms
 Primary difference here is that memory allocation is pre-allocated, as in the parallel environment selecting malloc arenas is the main overhead (followed by gsl beta calls)
+- recurrence only $n=10^9$ [[./bchmk/ep/makefile][makefile]]
+- scale-free $n = 2.5\times 10^8, d = 4$ (1b edges) [[./bchmk/sf/makefile][makefile]]
+
 * gcc flags
 - GNU Scientific Library (gsl) -lgsl -lcblas -lm
 - pthreads (threadding in c) -pthread

@@ -21,10 +21,15 @@ This repository contains the following programs in the *C* programming language.
 ** Networked Systems Infrastructure
 - British Telecomm (BT) 21-CN Backbone Network [[./][makefile]]
 
+
+
 * Benchmarking Algorithms
 Primary difference here is that memory allocation is pre-allocated, as in the parallel environment selecting malloc arenas is the main overhead (followed by gsl beta calls)
 - recurrence only $n=10^9$ [[./bchmk/ep/makefile][makefile]]
 - scale-free $n = 2.5\times 10^8, d = 4$ (1b edges) [[./bchmk/sf/makefile][makefile]]
+
+* Numerical Figure Reproduction
+Using ~make~  in ~.~ will reproduce the figures numerically in order with 100 repetitions.
 
 * gcc flags
 - GNU Scientific Library (gsl) -lgsl -lcblas -lm

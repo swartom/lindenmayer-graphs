@@ -1,5 +1,5 @@
 #+title: Lindenmayer Graphs: An Approach to Structured Random Graph Generation
-‘#+OPTIONS: tex:t’
+#+OPTIONS: tex:t
 
 This is the repository for results in the paper *Lindenmayer Graphs: An Approach to Structured Random Graph Generation*. This repository contains the following programs in the *C* programming language. This has three sections: First, we show the core statistical properties that can be generated with this approach; Second, we show structural properties of generation algorithms, highlighting the fact that because of the string rewrite formulation is CR Confluent, parallel operations can be done, and a d-cfl exists. Finally, we use the framework in an abstract manner to formulate two problems: Stochastic Block Models (SBM), and Block Two-Level ER Models (BTER). We terminate this with providing a scale-free model that is optimised to compare fairly under the same restricted set of assumptions from papers in the literature.
 

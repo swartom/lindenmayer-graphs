@@ -6,14 +6,14 @@ This is the repository for results in the paper *Lindenmayer Graphs: An Approach
 ** Statistical Models
 - scale-free networks [[./sf/makefile][makefile]] (Takes $n,d,\alpha,\beta$, as parameters)
 - small-world networks [[./sw/makefile][makefile]] (Takes $p$)
-- \(Erd\H{o}s-R\'enyi\} networks [[./er/makefile][makefile]] (Takes $p$)
+- Erd\H{o}s-R\'enyi networks [[./er/makefile][makefile]] (Takes $p$)
 ** Structural Models
 - Spanning Trees [[./struc/st/makefile][makefile]]
 - Complete Graphs [[./struc/cg/makefile][makefile]]
 - Network Lattice [[./struc/nl/makefile][makefile]]
 ** Communities & Social Networks
 - Stochastic Block Models (SBM) [[./cands/sb/makefile][makefile]]
-- Block Two-Level \(Erd\H{o}s-R\'enyi\) Models (BTER) [[./cands/er/makefile][makefile]]
+- Block Two-Level Erd\H{o}s-R\'enyi Models (BTER) [[./cands/er/makefile][makefile]]
 ** Networked Systems Infrastructure
 - British Telecomm (BT) 21-CN Backbone Network [[./][makefile]]
 

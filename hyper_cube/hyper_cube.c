@@ -69,12 +69,18 @@ void* rule( void* p) {
             m->previous = &A_x;
 
             if (A_x.y < ORDER) {
+                if (A_x.y <= THREADS) {
                 pthread_t thread1,thread2;
                 pthread_create( &thread1, NULL, rule, &A_x);
                 pthread_create( &thread2, NULL, rule, &L_g);
                 rule(m);
                 pthread_join(thread1,NULL);
                 pthread_join(thread2,NULL);
+                } else {
+                    rule(&A_x);
+                    rule(&L_g);
+                    rule(m);
+                }
             }
             break;}
         case 'L':{
@@ -109,9 +115,16 @@ void* rule( void* p) {
 
             if (L_x.z < ORDER) {
                 pthread_t thread1;
+                if (L_x.z <= THREADS){
                 pthread_create( &thread1, NULL, rule, &L_x);
                 rule(&L_gx);
                 pthread_join(thread1,NULL);
+                    } else {
+                        rule(&L_gx);
+                        rule(&L_x);
+                    }
+
+
             }
             break;
         }
@@ -122,7 +135,7 @@ int write_dot_file(module* iv) {
     module* chain = iv;
     FILE *fptr;
     fptr = fopen("graph.dot", "w");
-    fprintf(fptr, "graph {repulsiveforce=10\n\nbeautify=true \n \nnode[shape=point,width=.001,color=\"maroon\"]\nedge[penwidth=0.01,color=\"gray\"]");
+    fprintf(fptr, "graph {overlap=prism\ndimen=3\nrepulsiveforce=1\n\nbeautify=true \n \nnode[shape=point,width=.001,color=\"maroon\"]\nedge[penwidth=0.01,color=\"gray\"]");
     int test = 0;
     do {
         switch (chain->kind) {
@@ -152,7 +165,11 @@ int main(int argc, char *argv[]) {
     iv->x = 1;
     iv->y = 0;
 
+    struct timespec start={0,0}, end={0,0};
+    clock_gettime(CLOCK_MONOTONIC, &start);
     rule(iv);
+    clock_gettime(CLOCK_MONOTONIC, &end);
+    printf("%.10fs\n",((end.tv_sec + 1.0e-9*end.tv_nsec) - (start.tv_sec + 1.0e-9*start.tv_nsec)));
     write_dot_file(iv);
     module* previous = iv;
 

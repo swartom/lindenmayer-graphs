@@ -8,7 +8,7 @@
 #include <unistd.h>
 
 #define INTEGER_TYPE uint32_t
-#define ORDER 24
+#define ORDER 9
 #define THREADS 4
 
 #endif // HYPER_CUBE_H_

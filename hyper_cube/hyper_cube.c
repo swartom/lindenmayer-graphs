@@ -135,7 +135,7 @@ int write_dot_file(module* iv) {
     module* chain = iv;
     FILE *fptr;
     fptr = fopen("graph.dot", "w");
-    fprintf(fptr, "graph {overlap=prism\ndimen=3\nrepulsiveforce=1\n\nbeautify=true \n \nnode[shape=point,width=.001,color=\"maroon\"]\nedge[penwidth=0.01,color=\"gray\"]");
+    fprintf(fptr, "graph {overlap=prism\ndimen=3\nrepulsiveforce=1\n\nbeautify=true \n \nnode[shape=point,width=.001,color=\"maroon\"]\nedge[penwidth=0.1,color=\"black\"]");
     int test = 0;
     do {
         switch (chain->kind) {

@@ -26,12 +26,14 @@ typedef struct wrapper {
 
 module* restrict pre_allocation;
 
+
 void* rule( void* p) {
     #define M ((w *)p)->m
     #define R ((w *)p)->r
     /* switch (m->kind) { */
     /*     case 'A': */
-    // int r = ((m->y) - (m->x))/DIVISOR + m->x + 1; // Defining this here requires a memory call.
+    // int r = ((m->y) - (m->x))/DIVISOR + m->x + 1;
+    // // Defining this here requires a memory call. The line below explains is equivalent to this line.
     module* elements = (module*) &pre_allocation[(CONNECTIONS + 1)*( ((M->y) - (M->x))/DIVISOR + M->x - 1)];
     /* module* elements = (module *)malloc((CONNECTIONS + 1)*sizeof(module)); */
 

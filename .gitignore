@@ -5,3 +5,6 @@ tmp/
 
 *.pdf
 *.dot
+
+
+*/__pycache__/*

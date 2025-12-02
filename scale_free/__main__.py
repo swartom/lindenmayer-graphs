@@ -16,11 +16,13 @@ if __name__ == '__main__':
         print(a)
         datapoint =list()
         for i in threads:
-            cmd = f"taskset -c 0-{i-1} ./sf {graph} {4} {200} {0.50}"
+            time.sleep(10)
+            cmd = f"taskset -c 0-{i-1} ./sf {graph} {4} {i} {0.50}"
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])
             datapoint.append((i,total))
+            print(f"{i},{total}")
         import numpy as np
         data = np.array(datapoint)
         x = data[:,0]

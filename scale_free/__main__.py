@@ -28,10 +28,13 @@ if __name__ == '__main__':
         y = data[:,1]
         plt.plot(x,y,'r',marker='x')
 
-    ideal_point = data[0]
+    y1 = datapoint[0][1]
+    y2 = datapoint[1][1]
+    m = (y2-y1)
     data = list()
     for i in threads:
-        data.append((i,i*ideal_point[1]))
+        data.append((i,i*m))
+    print(data)
     data = np.array(data)
     x = data[:,0]
     y = data[:,1]

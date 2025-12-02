@@ -26,7 +26,7 @@ if __name__ == '__main__':
         data = np.array(datapoint)
         x = data[:,0]
         y = data[:,1]
-        plt.plot(x,y,marker='x')
+        plt.plot(x,y,'r',marker='x')
 
     ideal_point = data[0]
     data = list()
@@ -35,7 +35,23 @@ if __name__ == '__main__':
     data = np.array(data)
     x = data[:,0]
     y = data[:,1]
-    plt.plot(x,y,'--g')
+    plt.plot(x,y,'--',color="0.5")
+    graph = graph/threads[-1]
+    for a in range(repeats):
+        print(a)
+        datapoint =list()
+        for i in threads:
+            cmd = f"./sf {graph*i} {4} {i} {0.50}"
+            os.system(cmd)
+            result = os.popen(cmd).read()
+            total = float(result.split('s')[0])
+            datapoint.append((i,(((graph*i)*4)/total)/10**6))
+            print(f"{i},{total}")
+        w.write(f"{datapoint}\n")
+        data = np.array(datapoint)
+        x = data[:,0]
+        y = data[:,1]
+        plt.plot(x,y,'g',marker='b')
     plt.xlabel("Nodes")
-    plt.ylabel("Rate (Million Edges/Second)")
+    plt.ylabel("Rate (Million particles/second)")
     plt.savefig('output.pdf')

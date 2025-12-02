@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 
-threads = [1,2,4,6,8,9,10]
-repeats = 1
-graph= 25_000
+threads = [i for i in range(1,100,10)]
+repeats = 5
+graph= 250_000
 if __name__ == '__main__':
     print("Building Figures for The Scale-free graph")
     import os
@@ -17,11 +17,11 @@ if __name__ == '__main__':
         print(a)
         datapoint =list()
         for i in threads:
-            cmd = f"taskset -c 0-{i-1} ./sf {graph*i} {40} {i*2} {0.50}"
+            cmd = f"taskset -c 0-{i-1} ./sf {graph*i} {4} {i*2} {0.50}"
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])
-            datapoint.append((i,i/total))
+            datapoint.append((i,i))
         import numpy as np
         data = np.array(datapoint)
         x = data[:,0]
@@ -29,5 +29,5 @@ if __name__ == '__main__':
         plt.plot(x,y,marker='x')
         # plt.scale('log')
     plt.xlabel("threads")
-    plt.ylabel("speed-up")
-    plt.show()
+    plt.ylabel("execution-time")
+    plt.savefig('')

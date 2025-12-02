@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 
-threads = [i for i in range(1,100,10)]
+threads = [i for i in range(1,110,10)]
 repeats = 1
 graph= 250_000
 if __name__ == '__main__':
@@ -20,7 +20,7 @@ if __name__ == '__main__':
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])
-            datapoint.append((i,i))
+            datapoint.append((i,total))
         import numpy as np
         data = np.array(datapoint)
         x = data[:,0]

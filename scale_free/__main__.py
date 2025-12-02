@@ -8,7 +8,7 @@ if __name__ == '__main__':
     print("Building Figures for The Scale-free graph")
     import os
     import matplotlib.pyplot as plt
-    cmd = "gcc -lcblas -lgsl -O3 -lm -pthread ./scale_free/scale_free.c -o sf"
+    cmd = "gcc -lcblas -lgsl -Ofast -lm -pthread ./scale_free/scale_free.c -o sf"
     os.system(cmd)
 
     import time

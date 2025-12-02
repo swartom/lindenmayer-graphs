@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 
-threads = [1,2,4,8,16,32,64,128,256]
+threads = [2,4,8,16,32,64,128,256]
 repeats = 1
 graph= 10_000_000
 if __name__ == '__main__':
@@ -34,5 +34,5 @@ if __name__ == '__main__':
         plt.plot(x,y,marker='x')
         # plt.scale('log')
     plt.xlabel("threads")
-    plt.ylabel("execution-time")
+    plt.ylabel("speed-up")
     plt.savefig('output.pdf')

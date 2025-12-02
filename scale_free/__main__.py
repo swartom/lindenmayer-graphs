@@ -10,20 +10,13 @@ if __name__ == '__main__':
     import matplotlib.pyplot as plt
     cmd = "gcc -lcblas -lgsl -O3 -lm -pthread ./scale_free/scale_free.c -o sf"
     os.system(cmd)
+    import numpy as np
 
-    # datapoint =list()
-    # for i in threads:
-    #     cmd = f"./sf {graph*i} {40} {1} {0.50}"
-    #     os.system(cmd)
-    #     result = os.popen(cmd).read()
-    #     total = float(result.split('s')[0])
-    #     datapoint.append((i,total))
-    #     print(f"{i},{total}")
-    # import numpy as np
-    # data = np.array(datapoint)
-    # x = data[:,0]
-    # y = data[:,1]
-    # plt.plot(x,y,marker='x')
+    cmd = f"./sf {graph} {10} {1} {0.50}"
+    os.system(cmd)
+    result = os.popen(cmd).read()
+    comparison = float(result.split('s')[0])
+
     for a in range(repeats):
         print(a)
         datapoint =list()
@@ -32,7 +25,7 @@ if __name__ == '__main__':
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])
-            datapoint.append((i,total))
+            datapoint.append((i,comparison/total))
             print(f"{i},{total}")
 
         data = np.array(datapoint)

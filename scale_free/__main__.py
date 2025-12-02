@@ -2,7 +2,7 @@
 
 
 threads = [i for i in range(1,100,10)]
-repeats = 5
+repeats = 1
 graph= 250_000
 if __name__ == '__main__':
     print("Building Figures for The Scale-free graph")
@@ -12,7 +12,6 @@ if __name__ == '__main__':
     os.system(cmd)
 
     import time
-
     for a in range(repeats):
         print(a)
         datapoint =list()
@@ -30,4 +29,4 @@ if __name__ == '__main__':
         # plt.scale('log')
     plt.xlabel("threads")
     plt.ylabel("execution-time")
-    plt.savefig('')
+    plt.savefig('output.pdf')

@@ -32,7 +32,7 @@ if __name__ == '__main__':
         x = data[:,0]
         y = data[:,1]
         plt.plot(x,y,marker='x')
-        # plt.scale('log')
+        plt.xscale('log')
     plt.xlabel("threads")
     plt.ylabel("speed-up")
     plt.savefig('output.pdf')

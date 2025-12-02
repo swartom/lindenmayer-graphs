@@ -12,6 +12,9 @@ mkdir:
 hypercube:
 	python hyper_cube
 
-all: mkdir hypercube
+scalefree:
+	python scale_free
+
+all: mkdir hypercube scalefree
 
 # end

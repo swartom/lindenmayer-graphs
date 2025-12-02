@@ -160,17 +160,20 @@ int write_dot_file(module* iv) {
 }
 int main(int argc, char *argv[]) {
 
+    sscanf(argv[1],"%d", &ORDER);
+    sscanf(argv[2], "%d", &THREADS);
+
     module* iv = (module*)malloc(sizeof(module));
     iv->kind = 'A';
     iv->x = 1;
     iv->y = 0;
-
+    printf("ORDER %d THREADS %d\n", ORDER,THREADS);
     struct timespec start={0,0}, end={0,0};
     clock_gettime(CLOCK_MONOTONIC, &start);
     rule(iv);
     clock_gettime(CLOCK_MONOTONIC, &end);
     printf("%.10fs\n",((end.tv_sec + 1.0e-9*end.tv_nsec) - (start.tv_sec + 1.0e-9*start.tv_nsec)));
-    write_dot_file(iv);
+    /* write_dot_file(iv); */
     module* previous = iv;
 
 

@@ -144,6 +144,14 @@ int write_dot_file(module* iv) {
 
 
 int main(int argc, char *argv[]) {
+
+
+    sscanf(argv[1],"%d", &MAX);
+    sscanf(argv[2], "%d", &CONNECTIONS);
+    sscanf(argv[3],"%d", &THREADS);
+    sscanf(argv[4], "%lf", &ALPHA);
+
+
     double total = 0.0;
     double* times = alloca(REPETITIONS*sizeof(double));
     for(int i = 0; i < REPETITIONS; i ++){
@@ -172,10 +180,10 @@ int main(int argc, char *argv[]) {
     clock_gettime(CLOCK_MONOTONIC, &end);
     times[i] = (end.tv_sec + 1.0e-9*end.tv_nsec) - (start.tv_sec + 1.0e-9*start.tv_nsec);
     total += times[i];
-    printf("%.10fs\n",((end.tv_sec + 1.0e-9*end.tv_nsec) - (start.tv_sec + 1.0e-9*start.tv_nsec)));
+    /* printf("%.10fs\n",((end.tv_sec + 1.0e-9*end.tv_nsec) - (start.tv_sec + 1.0e-9*start.tv_nsec))); */
 
-    if (REPETITIONS == 1)
-        write_dot_file(iv);
+    /* if (REPETITIONS == 1) */
+    /*     write_dot_file(iv); */
 
     /* module* previous = iv; */
     /* do { */
@@ -191,14 +199,15 @@ int main(int argc, char *argv[]) {
     free(iv);
     gsl_rng_free(rand_src);
     }
+
     double average = total/(double)(REPETITIONS);
-    double sum = 0;
-    for (int i = 0; i < REPETITIONS; ++i)
-        sum += pow(times[i] -average,2);
-    double variance = sum/REPETITIONS;
-    double std_deviation = sqrt(variance);
-    printf("Edges: %d10\n",(MAX*CONNECTIONS));
-    printf("Average over %d : %.10fs : stdv: %.3f\%\n", (int)REPETITIONS, average,(std_deviation/average)*100);
-    printf("%.2fmE/PE/s",(((double)(MAX*CONNECTIONS)/1000000)/PROCESSORS)/average);
+    /* double sum = 0; */
+    /* for (int i = 0; i < REPETITIONS; ++i) */
+    /*     sum += pow(times[i] -average,2); */
+    /* double variance = sum/REPETITIONS; */
+    /* double std_deviation = sqrt(variance); */
+    /* printf("Edges: %d10\n",(MAX*CONNECTIONS)); */
+    printf("%.10fs\n", average);
+    /* printf("%.2fmE/PE/s",(((double)(MAX*CONNECTIONS)/1000000)/PROCESSORS)/average); */
     return 1;
 }

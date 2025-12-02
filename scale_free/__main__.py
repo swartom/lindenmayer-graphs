@@ -3,7 +3,7 @@
 
 threads = [1,2,4,8,16,32,64]
 repeats = 1
-graph= 250_000_000
+graph= 250_000_00
 if __name__ == '__main__':
     print("Building Figures for The Scale-free graph")
     import os
@@ -51,7 +51,7 @@ if __name__ == '__main__':
         data = np.array(datapoint)
         x = data[:,0]
         y = data[:,1]
-        plt.plot(x,y,'g',marker='b')
+        plt.plot(x,y,'g',marker='o')
     plt.xlabel("Nodes")
     plt.ylabel("Rate (Million particles/second)")
     plt.savefig('output.pdf')

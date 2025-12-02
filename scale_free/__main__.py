@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 
-threads = [2,4,8,16,32,64]
+threads = [1,2,4,8,16,32,64]
 repeats = 1
 graph= 250_000_000
 if __name__ == '__main__':
@@ -28,7 +28,14 @@ if __name__ == '__main__':
         y = data[:,1]
         plt.plot(x,y,marker='x')
 
-
+    ideal_point = data[0]
+    data = list()
+    for i in threads:
+        data.append((i,i*ideal_point[1]))
+    data = np.array(data)
+    x = data[:,0]
+    y = data[:,1]
+    plt.plot(x,y,'--g')
     plt.xlabel("Nodes")
     plt.ylabel("Rate (Million Edges/Second)")
     plt.savefig('output.pdf')

@@ -2,8 +2,8 @@
 
 
 threads = [2,4,8,16,32,64]
-repeats = 10
-graph= 250_000_00# _000
+repeats = 1
+graph= 250_000_000
 if __name__ == '__main__':
     print("Building Figures for The Scale-free graph")
     import os
@@ -12,11 +12,6 @@ if __name__ == '__main__':
     os.system(cmd)
     import numpy as np
     w = open("data.txt","w")
-    cmd = f"./sf {graph} {4} {1} {0.50}"
-    os.system(cmd)
-    result = os.popen(cmd).read()
-    comparison = float(result.split('s')[0])
-    w.write(f"{comparison}\n")
     for a in range(repeats):
         print(a)
         datapoint =list()

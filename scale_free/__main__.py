@@ -9,16 +9,17 @@ if __name__ == '__main__':
     cmd = "gcc -lcblas -lgsl -O3 -lm -pthread ./scale_free/scale_free.c -o sf"
     os.system(cmd)
     import numpy as np
-    w = open("data.txt","w")
+
+    edges = 3
     for a in range(repeats):
         print(a)
         datapoint =list()
         for i in threads:
-            cmd = f"./sf {graph} {3} {i} {0.50}"
+            cmd = f"./sf {graph} {edges} {i} {0.50}"
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])
-            datapoint.append((i,((graph)/total)/10**6))
+            datapoint.append((i,((graph*edges)/total)/10**6))
             print(f"{i},{total}")
 
         data = np.array(datapoint)
@@ -29,7 +30,7 @@ if __name__ == '__main__':
     ideal_point = data[0]
     data = list()
     for i in threads:
-        data.append((i,i*(ideal_point[1]/4)))
+        data.append((i,i*(ideal_point[1])))
     data = np.array(data)
     x = data[:,0]
     y = data[:,1]
@@ -43,13 +44,13 @@ if __name__ == '__main__':
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])
-            datapoint.append((i,(((graph*i))/total)/10**6))
+            datapoint.append((i,(((graph*edges))/total)/10**6))
             print(f"{i},{total}")
-        w.write(f"{datapoint}\n")
+
         data = np.array(datapoint)
         x = data[:,0]
         y = data[:,1]
         plt.plot(x,y,'g',marker='o')
     plt.xlabel("Threads")
-    plt.ylabel("Rate (Million particles/second)")
+    plt.ylabel("Rate (Million particles connections/second)")
     plt.savefig('output.pdf')

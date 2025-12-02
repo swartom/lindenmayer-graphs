@@ -29,24 +29,24 @@ if __name__ == '__main__':
         plt.figure(1)
         plt.plot(x,z,'b',marker='x')
         plt.xlabel("Threads")
-        plt.ylabel("Rate (Million particles connections/second/ Per Processor)")
+        plt.ylabel("Rate (Million particles connections/second/ Processor)")
         plt.savefig('out1.pdf')
         plt.figure(2)
         plt.plot(x,y,'r',marker='x')
-    # ideal_point = data[0]
-    # data = list()
-    # for i in threads:
-    #     data.append((i,i*(ideal_point[1])))
-    # data = np.array(data)
-    # x = data[:,0]
-    # y = data[:,1]
-    # plt.plot(x,y,'--',color="0.5")
+    ideal_point = data[0]
+    data = list()
+    for i in threads:
+        data.append((i,i*(ideal_point[1])))
+    data = np.array(data)
+    x = data[:,0]
+    y = data[:,1]
+    plt.plot(x,y,'--',color="0.5")
     graph = graph//threads[-1]
     for a in range(repeats):
         print(a)
         datapoint =list()
         for i in threads:
-            cmd = f"./sf {graph*i} {3} {i} {0.50}"
+            cmd = f"./sf {graph*i} {edges} {i} {0.50}"
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])

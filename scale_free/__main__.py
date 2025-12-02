@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 
-threads = [2,4,8,16,32]
+threads = [2,4,8,16,32,64]
 repeats = 1
 graph= 250_000_000
 if __name__ == '__main__':
@@ -32,6 +32,7 @@ if __name__ == '__main__':
         x = data[:,0]
         y = data[:,1]
         plt.plot(x,y,marker='x')
+        plt.xscale('log')
 
     plt.xlabel("threads")
     plt.ylabel("speed-up")

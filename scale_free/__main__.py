@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 
-threads = [1,2,4,8,16,32,64]
+threads = [16,32,64]
 repeats = 1
 graph= 1_000_000_000
 if __name__ == '__main__':

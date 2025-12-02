@@ -68,7 +68,9 @@ void* rule( void* p) {
     if (A_r.x != A_r.y){
         w wrapper;
         wrapper.m = &A_r;
-        if((A_r.y)-(A_r.x) > LIMIT ){
+
+        if((A_r.y)-(A_r.x) > (LIMIT) ){
+            /* printf("%d,%d,%d,%d\n",A_r.y,A_r.x, A_r.y - A_r.x,(LIMIT + 1)); */
             pthread_t thread;
             wrapper.r = gsl_rng_alloc (gsl_rng_taus);
             gsl_rng_set(wrapper.r,SEED+A_r.y);
@@ -82,9 +84,6 @@ void* rule( void* p) {
             check_M
         }
     } else check_M
-    /*     default: */
-    /*         break; */
-    /* } */
     return 0;
 }
 

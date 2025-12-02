@@ -22,8 +22,6 @@ void* rule( void* p) {
     #define M ((w *)p)->m
 
     module* elements = (module*) &pre_allocation[( ((M->y) - (M->x))/DIVISOR + M->x - 1)];
-    if (((M->y) - (M->x))/DIVISOR + M->x - 1 != 0)
-        printf("%d",((M->y) - (M->x))/DIVISOR + M->x - 1);
     #define A_r elements[0]
 
     A_r.kind = 'A';
@@ -31,7 +29,7 @@ void* rule( void* p) {
     A_r.y = ((M->y) - (M->x))/DIVISOR + M->x; // r-1
     A_r.previous = M->previous;
     M->previous = &A_r;
-
+    M->x = A_r.y + 1;
     #define check_M if (M->x != M->y) rule(p);
 
     if (A_r.x != A_r.y){
@@ -130,7 +128,7 @@ int main(int argc, char *argv[]) {
     sleep(SECONDS_WAIT_BETWEEN_REPEATS);
 
     clock_gettime(CLOCK_MONOTONIC, &start);
-    /* rule(&wrapper); */
+    rule(&wrapper);
     clock_gettime(CLOCK_MONOTONIC, &end);
     times[i] = (end.tv_sec + 1.0e-9*end.tv_nsec) - (start.tv_sec + 1.0e-9*start.tv_nsec);
     total += times[i];

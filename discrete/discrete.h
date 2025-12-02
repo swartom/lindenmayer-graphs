@@ -11,8 +11,8 @@ int MAX = 1000;
 #define DIVISOR 2
 int THREADS =  64;  // (uint32_t)sysconf(_SC_NPROCESSORS_ONLN) * 8
 #define LIMIT (MAX/(2*THREADS))
-#define REPETITIONS 10
-#define SECONDS_WAIT_BETWEEN_REPEATS 0
+#define REPETITIONS 300
+#define SECONDS_WAIT_BETWEEN_REPEATS .5
 
 // System Info
 #define INTEGER_TYPE uint32_t

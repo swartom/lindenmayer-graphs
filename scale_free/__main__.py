@@ -20,7 +20,7 @@ if __name__ == '__main__':
             total = float(result.split('s')[0])
             datapoint.append((i,((graph)/total)/10**6))
             print(f"{i},{total}")
-        w.write(f"{datapoint}\n")
+
         data = np.array(datapoint)
         x = data[:,0]
         y = data[:,1]
@@ -29,7 +29,7 @@ if __name__ == '__main__':
     ideal_point = data[0]
     data = list()
     for i in threads:
-        data.append((i,i*ideal_point[1]))
+        data.append((i,i*(ideal_point[1]/4)))
     data = np.array(data)
     x = data[:,0]
     y = data[:,1]

@@ -11,7 +11,6 @@ if __name__ == '__main__':
     cmd = "gcc -lcblas -lgsl -O3 -lm -pthread ./scale_free/scale_free.c -o sf"
     os.system(cmd)
     import numpy as np
-    w = open("data.txt","w")
     for a in range(repeats):
         print(a)
         datapoint =list()
@@ -21,16 +20,14 @@ if __name__ == '__main__':
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])
             datapoint.append((i,((graph)/total)/10**6))
-            print(f"{i},{total}")
-        w.write(f"{datapoint}\n")
         data = np.array(datapoint)
         x = data[:,0]
         y = data[:,1]
         plt.plot(x,y,'r',marker='x')
 
     y1 = datapoint[0][1]
-    y2 = datapoint[1][1]
-    m = (y2-y1)
+
+    m = (y1)
     data = list()
     for i in threads:
         data.append((i,i*m))
@@ -50,7 +47,7 @@ if __name__ == '__main__':
             total = float(result.split('s')[0])
             datapoint.append((i,(((graph*i))/total)/10**6))
             print(f"{i},{total}")
-        w.write(f"{datapoint}\n")
+
         data = np.array(datapoint)
         x = data[:,0]
         y = data[:,1]

@@ -1,1 +1,4 @@
-#+title: Lindenmayer Graphs: An Approach to Rapidly Generate Structured Random Graphs
+#+title: Lindenmayer Graphs
+
+
+make all

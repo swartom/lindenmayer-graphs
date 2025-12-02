@@ -34,7 +34,7 @@ if __name__ == '__main__':
     x = data[:,0]
     y = data[:,1]
     plt.plot(x,y,'--',color="0.5")
-    graph = graph/threads[-1]
+    graph = graph//threads[-1]
     for a in range(repeats):
         print(a)
         datapoint =list()

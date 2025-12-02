@@ -17,7 +17,7 @@ if __name__ == '__main__':
         datapoint =list()
         for i in threads:
             time.sleep(10)
-            cmd = f"./sf {graph} {4} {i} {0.50}"
+            cmd = f"./sf {graph*i} {4} {i} {0.50}"
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])

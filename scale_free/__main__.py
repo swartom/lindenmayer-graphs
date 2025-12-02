@@ -3,7 +3,7 @@
 
 threads = [1,2,4,8,16,32,64]
 repeats = 1
-graph= 250_000_00
+graph= 250_000_000
 if __name__ == '__main__':
     print("Building Figures for The Scale-free graph")
     import os
@@ -11,27 +11,27 @@ if __name__ == '__main__':
     cmd = "gcc -lcblas -lgsl -O3 -lm -pthread ./scale_free/scale_free.c -o sf"
     os.system(cmd)
     import numpy as np
+    w = open("data.txt","w")
     for a in range(repeats):
         print(a)
         datapoint =list()
         for i in threads:
-            cmd = f"./sf {graph} {40} {i} {0.50}"
+            cmd = f"./sf {graph} {8} {i} {0.50}"
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])
             datapoint.append((i,((graph)/total)/10**6))
+            print(f"{i},{total}")
+        w.write(f"{datapoint}\n")
         data = np.array(datapoint)
         x = data[:,0]
         y = data[:,1]
         plt.plot(x,y,'r',marker='x')
 
-    y1 = datapoint[0][1]
-
-    m = (y1)
+    ideal_point = data[0]
     data = list()
     for i in threads:
-        data.append((i,i*m))
-    print(data)
+        data.append((i,i*ideal_point[1]))
     data = np.array(data)
     x = data[:,0]
     y = data[:,1]
@@ -47,7 +47,7 @@ if __name__ == '__main__':
             total = float(result.split('s')[0])
             datapoint.append((i,(((graph*i))/total)/10**6))
             print(f"{i},{total}")
-
+        w.write(f"{datapoint}\n")
         data = np.array(datapoint)
         x = data[:,0]
         y = data[:,1]

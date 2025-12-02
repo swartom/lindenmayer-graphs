@@ -25,7 +25,7 @@ if __name__ == '__main__':
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])
-            datapoint.append((i,(graph*4)/total)/10**6)
+            datapoint.append((i,((graph*4)/total)/10**6))
             print(f"{i},{total}")
         w.write(f"{datapoint}\n")
         data = np.array(datapoint)

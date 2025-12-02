@@ -11,12 +11,12 @@ if __name__ == '__main__':
     cmd = "gcc -lcblas -lgsl -O3 -lm -pthread ./scale_free/scale_free.c -o sf"
     os.system(cmd)
     import numpy as np
-
+    w = open("data.txt","w")
     cmd = f"./sf {graph} {4} {1} {0.50}"
     os.system(cmd)
     result = os.popen(cmd).read()
     comparison = float(result.split('s')[0])
-
+    w.write(f"{comparison}\n")
     for a in range(repeats):
         print(a)
         datapoint =list()
@@ -27,7 +27,7 @@ if __name__ == '__main__':
             total = float(result.split('s')[0])
             datapoint.append((i,comparison/total))
             print(f"{i},{total}")
-
+        w.write(f"{datapoint}\n")
         data = np.array(datapoint)
         x = data[:,0]
         y = data[:,1]

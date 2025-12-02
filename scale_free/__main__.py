@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 threads = [1,2,4,8,16,32]
 repeats = 1
-graph= 1_000_000_0
+graph= 1_000_000_00
 if __name__ == '__main__':
     print("Building Figures for The Scale-free graph")
     import os
@@ -44,7 +44,7 @@ if __name__ == '__main__':
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])
-            datapoint.append((i,(((graph*edges))/total)/10**6))
+            datapoint.append((i,(((graph*i*edges))/total)/10**6))
             print(f"{i},{total}")
 
         data = np.array(datapoint)

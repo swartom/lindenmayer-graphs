@@ -3,7 +3,7 @@
 
 threads = [i for i in range(1,110,10)]
 repeats = 1
-graph= 2_500_00
+graph= 250_000
 if __name__ == '__main__':
     print("Building Figures for The Scale-free graph")
     import os
@@ -16,7 +16,7 @@ if __name__ == '__main__':
         print(a)
         datapoint =list()
         for i in threads:
-            cmd = f"taskset -c 0-{i-1} ./sf {graph*i} {4} {i} {0.50}"
+            cmd = f"taskset -c 0-{i-1} ./sf {graph} {4} {200} {0.50}"
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])

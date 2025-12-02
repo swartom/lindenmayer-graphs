@@ -30,10 +30,14 @@ module* restrict pre_allocation;
 void* rule( void* p) {
     #define M ((w *)p)->m
     #define R ((w *)p)->r
+    pthread_t thread;
+    w wrapper;
+    uint8_t is_spinning = 0;
     /* switch (m->kind) { */
     /*     case 'A': */
     // int r = ((m->y) - (m->x))/DIVISOR + m->x + 1;
     // // Defining this here requires a memory call. The line below explains is equivalent to this line.
+    do{
     module* elements = (module*) &pre_allocation[(CONNECTIONS + 1)*( ((M->y) - (M->x))/DIVISOR + M->x - 1)];
     /* module* elements = (module *)malloc((CONNECTIONS + 1)*sizeof(module)); */
 
@@ -46,7 +50,6 @@ void* rule( void* p) {
 
     M->previous = &elements[CONNECTIONS];
     M->x = A_r.y + 1;
-
     {
         double source = gsl_ran_beta(R, ALPHA, BETA);
         /* double source = gsl_ran_gamma(R, 20.0,1.0); */
@@ -63,28 +66,27 @@ void* rule( void* p) {
          }
     }
 
-    #define check_M if (M->x != M->y) rule(p);
-
     if (A_r.x != A_r.y){
-        w wrapper;
         wrapper.m = &A_r;
         if((A_r.y)-(A_r.x) > LIMIT ){
-            pthread_t thread;
             wrapper.r = gsl_rng_alloc (gsl_rng_taus);
             gsl_rng_set(wrapper.r,SEED+A_r.y);
             pthread_create( &thread, NULL, rule, &wrapper);
-            check_M
-            pthread_join(thread,NULL);
+            is_spinning = 1;
             gsl_rng_free(wrapper.r);
         } else {
             wrapper.r = R;
             rule(&wrapper);
-            check_M
         }
-    } else check_M
+    }
     /*     default: */
     /*         break; */
     /* } */
+    }while((M->x != M->y));
+    if(is_spinning){
+        pthread_join(thread,NULL);
+        gsl_rng_free(wrapper.r);
+    }
     return 0;
 }
 

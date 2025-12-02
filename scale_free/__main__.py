@@ -15,7 +15,7 @@ if __name__ == '__main__':
         print(a)
         datapoint =list()
         for i in threads:
-            cmd = f"./sf {graph} {8} {i} {0.50}"
+            cmd = f"./sf {graph} {40} {i} {0.50}"
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])

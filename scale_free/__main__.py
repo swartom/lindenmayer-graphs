@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-
-
-threads = [64]
+threads = [4,16,32,64]
 repeats = 1
 graph= 1_000_000_000
 if __name__ == '__main__':
@@ -16,7 +14,7 @@ if __name__ == '__main__':
         print(a)
         datapoint =list()
         for i in threads:
-            cmd = f"./sf {graph} {4} {i} {0.50}"
+            cmd = f"./sf {graph} {3} {i} {0.50}"
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])

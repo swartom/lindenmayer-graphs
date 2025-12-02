@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 
-threads = [2,4,8,16,32,64,128,256]
+threads = [2,4,8,16,32]
 repeats = 1
-graph= 10_000_000
+graph= 100_000_000
 if __name__ == '__main__':
     print("Building Figures for The Scale-free graph")
     import os
@@ -12,7 +12,7 @@ if __name__ == '__main__':
     os.system(cmd)
     import numpy as np
 
-    cmd = f"./sf {graph} {10} {1} {0.50}"
+    cmd = f"./sf {graph} {60} {1} {0.50}"
     os.system(cmd)
     result = os.popen(cmd).read()
     comparison = float(result.split('s')[0])
@@ -21,7 +21,7 @@ if __name__ == '__main__':
         print(a)
         datapoint =list()
         for i in threads:
-            cmd = f"./sf {graph} {10} {i} {0.50}"
+            cmd = f"./sf {graph} {60} {i} {0.50}"
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])

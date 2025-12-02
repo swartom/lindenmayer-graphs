@@ -3,7 +3,7 @@
 
 threads = [1,2,4,8,16,32,64]
 repeats = 1
-graph= 500_000_000
+graph= 250_000_000
 if __name__ == '__main__':
     print("Building Figures for The Scale-free graph")
     import os
@@ -20,7 +20,7 @@ if __name__ == '__main__':
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])
-            datapoint.append((i,((graph*4)/total)/10**6))
+            datapoint.append((i,((graph)/total)/10**6))
             print(f"{i},{total}")
         w.write(f"{datapoint}\n")
         data = np.array(datapoint)
@@ -45,7 +45,7 @@ if __name__ == '__main__':
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])
-            datapoint.append((i,(((graph*i)*4)/total)/10**6))
+            datapoint.append((i,(((graph*i))/total)/10**6))
             print(f"{i},{total}")
         w.write(f"{datapoint}\n")
         data = np.array(datapoint)

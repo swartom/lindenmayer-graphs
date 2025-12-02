@@ -3,7 +3,7 @@
 
 threads = [2,4,8,16,32]
 repeats = 1
-graph= 100_000_000
+graph= 250_000_000
 if __name__ == '__main__':
     print("Building Figures for The Scale-free graph")
     import os
@@ -12,7 +12,7 @@ if __name__ == '__main__':
     os.system(cmd)
     import numpy as np
 
-    cmd = f"./sf {graph} {60} {1} {0.50}"
+    cmd = f"./sf {graph} {4} {1} {0.50}"
     os.system(cmd)
     result = os.popen(cmd).read()
     comparison = float(result.split('s')[0])

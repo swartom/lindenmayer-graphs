@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-threads = [1,2,4,8,16,32]
+threads = [8,16,32] # 1,2,4,
 repeats = 1
-graph= 10_000_000# 1_000_000#_000
+graph= 25_000_000# 1_000_000#_000
 if __name__ == '__main__':
     print("Building Figures for The Scale-free graph")
     import os

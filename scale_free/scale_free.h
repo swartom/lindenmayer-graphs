@@ -18,7 +18,7 @@ int THREADS =  64;  // (uint32_t)sysconf(_SC_NPROCESSORS_ONLN) * 8
 #define SECONDS_WAIT_BETWEEN_REPEATS 0
 
 // System Info
-#define INTEGER_TYPE uint64_t
+#define INTEGER_TYPE uint32_t
 #define SEED 150
 
 int ALPHA = 0.5;

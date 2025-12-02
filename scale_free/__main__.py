@@ -3,7 +3,7 @@
 
 threads = [2,4,8,16,32]
 repeats = 1
-graph= 250_000_000
+graph= 250_000
 if __name__ == '__main__':
     print("Building Figures for The Scale-free graph")
     import os

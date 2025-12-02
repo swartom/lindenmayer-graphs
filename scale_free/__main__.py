@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 threads = [1,2,4,8,16,32]
 repeats = 1
-graph= 1_000_000_00
+graph= 1_000_000_000
 if __name__ == '__main__':
     print("Building Figures for The Scale-free graph")
     import os
@@ -25,16 +25,22 @@ if __name__ == '__main__':
         data = np.array(datapoint)
         x = data[:,0]
         y = data[:,1]
+        z = y/x
+        plt.figure(1)
+        plt.plot(x,z,'b',marker='x')
+        plt.xlabel("Threads")
+        plt.ylabel("Rate (Million particles connections/second/ Per Processor)")
+        plt.savefig('out1.pdf')
+        plt.figure(2)
         plt.plot(x,y,'r',marker='x')
-
-    ideal_point = data[0]
-    data = list()
-    for i in threads:
-        data.append((i,i*(ideal_point[1])))
-    data = np.array(data)
-    x = data[:,0]
-    y = data[:,1]
-    plt.plot(x,y,'--',color="0.5")
+    # ideal_point = data[0]
+    # data = list()
+    # for i in threads:
+    #     data.append((i,i*(ideal_point[1])))
+    # data = np.array(data)
+    # x = data[:,0]
+    # y = data[:,1]
+    # plt.plot(x,y,'--',color="0.5")
     graph = graph//threads[-1]
     for a in range(repeats):
         print(a)

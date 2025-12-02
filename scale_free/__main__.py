@@ -2,8 +2,8 @@
 
 
 threads = [2,4,8,16,32,64]
-repeats = 1
-graph= 250_000_000
+repeats = 10
+graph= 250_000# _000
 if __name__ == '__main__':
     print("Building Figures for The Scale-free graph")
     import os
@@ -25,15 +25,15 @@ if __name__ == '__main__':
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])
-            datapoint.append((i,comparison/total))
+            datapoint.append((i,(graph*4)/total))
             print(f"{i},{total}")
         w.write(f"{datapoint}\n")
         data = np.array(datapoint)
         x = data[:,0]
         y = data[:,1]
         plt.plot(x,y,marker='x')
-        plt.xscale('log')
 
-    plt.xlabel("threads")
-    plt.ylabel("speed-up")
+
+    plt.xlabel("Nodes")
+    plt.ylabel("Rate (Million Edges/Second)")
     plt.savefig('output.pdf')

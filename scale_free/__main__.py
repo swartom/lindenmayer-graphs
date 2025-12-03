@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-threads = [1,2,4,8,16,32] #
+threads = [8,16,32]  # 1,2,4,
 repeats = 1
-graph= 50_000_000# 1_000_000#_000
+graph= 1_000_000_000# 1_000_000#_000
 if __name__ == '__main__':
     print("Building Figures for The Scale-free graph")
     import os
@@ -10,7 +10,7 @@ if __name__ == '__main__':
     os.system(cmd)
     import numpy as np
 
-    edges = 64
+    edges = 3
     for a in range(repeats):
         print(a)
         datapoint =list()

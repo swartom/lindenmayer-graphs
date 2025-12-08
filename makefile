@@ -15,6 +15,6 @@ hypercube:
 scalefree:
 	python scale_free
 
-all: mkdir hypercube scalefree
+all: mkdir hypercube
 
 # end

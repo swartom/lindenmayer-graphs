@@ -134,7 +134,7 @@ void* rule( void* p) {
 int write_dot_file(module* iv) {
     module* chain = iv;
     FILE *fptr;
-    fptr = fopen("graph.dot", "w");
+    fptr = fopen("graph_.dot", "w");
     fprintf(fptr, "graph {overlap=prism\ndimen=3\nrepulsiveforce=1\n\nbeautify=true \n \nnode[shape=point,width=.001,color=\"maroon\"]\nedge[penwidth=0.1,color=\"black\"]");
     int test = 0;
     do {
@@ -175,8 +175,5 @@ int main(int argc, char *argv[]) {
     printf("%.10fs\n",((end.tv_sec + 1.0e-9*end.tv_nsec) - (start.tv_sec + 1.0e-9*start.tv_nsec)));
     /* write_dot_file(iv); */
     module* previous = iv;
-
-
-
     return 0;
 }

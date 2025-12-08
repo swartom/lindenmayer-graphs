@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 
-values = [i+1 for i in range(24)]
+values = [i+1 for i in range(30)]
 threads = [0,1,2,3]
 
 if __name__ == '__main__':

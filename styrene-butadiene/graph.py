@@ -16,7 +16,7 @@ for line in open("graph.adjlist"):
 
 g.remove_node('')
 nx.draw(g,pos = nx.kamada_kawai_layout(g)
-,node_color="red",edge_color=".5",node_size=1,connectionstyle=connectionstyle)
+,node_color="red",edge_color="0",node_size=10,connectionstyle=connectionstyle)
 
 import matplotlib.pyplot as plt
 

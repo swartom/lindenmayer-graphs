@@ -49,8 +49,9 @@ void* rule( void* p) {
     M->x = A_r.y + 1;
 
     {
-        double source = gsl_ran_flat(R, 0.01, 0.99);
-        source = gsl_cdf_beta_Pinv(source,.5,1);
+        /* double source = gsl_ran_flat(R, 0.01, 0.99); */
+        /* source = gsl_cdf_beta_Pinv(source,.5,1); */
+        double source = gsl_ran_beta(R, ALPHA, 1);
         /* double source = gsl_ran_gamma(R, 20.0,1.0); */
 
         INTEGER_TYPE x = (A_r.y)*source;
@@ -150,9 +151,9 @@ int main(int argc, char *argv[]) {
     sscanf(argv[1],"%d", &MAX);
     sscanf(argv[2], "%d", &CONNECTIONS);
     sscanf(argv[3],"%d", &THREADS);
+
     sscanf(argv[4], "%lf", &ALPHA);
-
-
+    
     double total = 0.0;
     double* times = alloca(REPETITIONS*sizeof(double));
     for(int i = 0; i < REPETITIONS; i ++){

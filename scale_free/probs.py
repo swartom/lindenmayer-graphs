@@ -21,9 +21,12 @@ fig = plt.figure(2)
 
 ax2 = fig.add_subplot(1,1,1)
 
-sizes = [10 ** (i+1)for i in range(5) ]
-for i in sizes:
-    cmd = f"./sf {i} {4} {16} {.5}"
+size = 10 ** 4
+
+prob = [ i for i in range(10) ]
+for i in prob:
+    print(prob)
+    cmd = f"./sf {size} {4} {12} {prob}"
     os.system(cmd)
 
     G = nx.read_adjlist("graph.adjlist")

@@ -75,11 +75,11 @@ void  rule(module* m ) {
         rule(m);
     }
     else if (m-> z == 0){
-        module* elements = malloc(sizeof(module)*20);
+        module* elements = malloc(sizeof(module)*21);
 
         int x = m->x;
 
-        for (int i =1; i < 20; i++ )
+        for (int i =1; i < 21; i++ )
             elements[i].previous = &elements[i-1];
 
         new_module(&elements[0] ,'A',x,x+5,STYRENE);
@@ -103,9 +103,10 @@ void  rule(module* m ) {
         new_module(&elements[18],'A',x+34,x+39,STYRENE);
 
         new_module(&elements[19],'L',x+27,0,0);
+        new_module(&elements[20],'A',x+46,0,0);
         new_module(m,'A',x+40,m->y,0);
         elements[0].previous = m->previous;
-        m->previous = &elements[19];
+        m->previous = &elements[20];
 
 
         if  (m->z == 0 && m->x + 39 <= m->y) {

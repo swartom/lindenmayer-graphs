@@ -173,7 +173,7 @@ int main(int argc, char *argv[]) {
     rule(iv);
     clock_gettime(CLOCK_MONOTONIC, &end);
     printf("%.10fs\n",((end.tv_sec + 1.0e-9*end.tv_nsec) - (start.tv_sec + 1.0e-9*start.tv_nsec)));
-    /* write_dot_file(iv); */
+    write_dot_file(iv);
     module* previous = iv;
     return 0;
 }

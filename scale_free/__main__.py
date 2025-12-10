@@ -10,7 +10,7 @@ if __name__ == '__main__':
     os.system(cmd)
     import numpy as np
 
-    edges = 64
+    edges = 4
     for a in range(repeats):
         print(f"REPETITION {a}")
         datapoint =list()

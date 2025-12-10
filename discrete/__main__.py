@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-threads = [2,4,8]
-graphs = [ 10 ** i for i in range(1,8) ]
+threads = [2,4,8,16,32]
+graphs = [  i for i in range(1,7) ]
 repeats = 1
 if __name__ == '__main__':
     print("Building Figures for The Discrete graph")
@@ -9,15 +9,15 @@ if __name__ == '__main__':
     cmd = "gcc -O3 -lm -pthread ./discrete/discrete.c -o ds"
     os.system(cmd)
     import numpy as np
-    for a in graphs:
+    for a in threads:
         print(a)
         datapoint =list()
-        for i in threads:
-            cmd = f"./ds {a} {i}"
+        for i in graphs:
+            cmd = f"./sf {10 ** i} {4} {a} {0.5}"
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])
-            datapoint.append((i,((a)/total)/10**6))
+            datapoint.append((10**i,total))
             print(f"{i},{total}")
 
         data = np.array(datapoint)
@@ -25,9 +25,11 @@ if __name__ == '__main__':
         y = data[:,1]
 
         plt.figure(1)
-        plt.plot(x,y,marker='x',label=f'{a}')
+        plt.plot(x,y,marker='x',label=f'{a} Threads')
         # plt.legend()
 
-    plt.xlabel("Threads")
-    plt.ylabel("Millon Nodes/second")
+    plt.xlabel("Graph  Vertices")
+    plt.ylabel("Execution Time (seconds)")
+    plt.xscale("log")
+    plt.legend()
     plt.savefig('discrete_graph_execution_time.pdf')

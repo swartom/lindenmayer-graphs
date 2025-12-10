@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-threads = [8,16,32]  # 1,2,4,
+threads = [1,2,4,8,16,32]  # 1,2,4,
 repeats = 1
 graph= 1_000_000_000# 1_000_000#_000
 if __name__ == '__main__':
@@ -19,7 +19,7 @@ if __name__ == '__main__':
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])
-            datapoint.append((i,((graph*edges)/total)/10**6))
+            datapoint.append((i,(total)))
             print(f"{i},{total}")
 
         data = np.array(datapoint)
@@ -33,14 +33,9 @@ if __name__ == '__main__':
         plt.savefig('out1.pdf')
         plt.figure(2)
         plt.plot(x,y,'r',marker='x')
+        plt.savefig('strong_scaling.pdf')
+        plt.figure(3)
     ideal_point = data[0]
-    data = list()
-    for i in threads:
-        data.append((i,i*(ideal_point[1])))
-    data = np.array(data)
-    x = data[:,0]
-    y = data[:,1]
-    plt.plot(x,y,'--',color="0.5")
     graph = graph//threads[-1]
     for a in range(repeats):
         print(a)
@@ -50,7 +45,7 @@ if __name__ == '__main__':
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])
-            datapoint.append((i,(((graph*i*edges))/total)/10**6))
+            datapoint.append((i,total))
             print(f"{i},{total}")
 
         data = np.array(datapoint)
@@ -58,5 +53,5 @@ if __name__ == '__main__':
         y = data[:,1]
         plt.plot(x,y,'g',marker='o')
     plt.xlabel("Threads")
-    plt.ylabel("Rate (Million particles connections/second)")
-    plt.savefig('output.pdf')
+    plt.ylabel("Seconds")
+    plt.savefig('weak_scaling.pdf')

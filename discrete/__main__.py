@@ -13,7 +13,7 @@ if __name__ == '__main__':
         print(a)
         datapoint =list()
         for i in graphs:
-            cmd = f"./sf {10 ** i} {64} {a} {0.5}"
+            cmd = f"./sf {10 ** i} {4} {a} {0.5}"
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])

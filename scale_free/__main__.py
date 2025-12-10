@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-threads = [1,2,4,8]#,16,32]  # 1,2,4,
+threads = [1,2,4,8,16,32]  # 1,2,4,
 repeats = 10
 graph= 10_000_000#_000# 1_000_000#_000
 if __name__ == '__main__':
@@ -29,12 +29,10 @@ if __name__ == '__main__':
         y = data[:,1]
         z = y/x
         y = y[0]/y
-        plt.figure(1)
-        plt.plot(x,z,'b',marker='x')
-        plt.xlabel("Threads")
-        plt.ylabel("Rate (Million particles connections/second/ Processor)")
-        plt.savefig('out1.pdf')
+
         plt.figure(2)
+        plt.xlabel("Threads")
+        plt.ylabel("Speed-up ")
         plt.plot(x,y,'r',marker='x')
         plt.savefig('strong_scaling.pdf')
         plt.figure(3)
@@ -55,7 +53,7 @@ if __name__ == '__main__':
         x = data[:,0]
         y = data[:,1]
 
-        plt.plot(x,y,'g',marker='o')
+        plt.plot(x,y,'g',marker='s')
     plt.xlabel("Threads")
     plt.ylabel("Seconds")
     plt.savefig('weak_scaling.pdf')

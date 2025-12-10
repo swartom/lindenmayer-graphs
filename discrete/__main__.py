@@ -31,5 +31,6 @@ if __name__ == '__main__':
     plt.xlabel("Graph  Vertices")
     plt.ylabel("Execution Time (seconds)")
     plt.xscale("log")
+    plt.yscale("log")
     plt.legend()
     plt.savefig('discrete_graph_execution_time.pdf')

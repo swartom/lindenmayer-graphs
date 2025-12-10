@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 threads = [2,4,8,16,32]
-graphs = [  i for i in range(3,8) ]
+graphs = [  i for i in range(3,9) ]
 repeats = 1
 if __name__ == '__main__':
     print("Building Figures for The Discrete graph")

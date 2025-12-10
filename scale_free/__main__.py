@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 threads = [1,2,4,8,16,32]  # 1,2,4,
-repeats = 10
-graph= 250_000_000#_000# 1_000_000#_000
+repeats = 1
+graph= 250_000_000# 1_000_000#_000
 if __name__ == '__main__':
     print("Building Figures for The Scale-free graph")
     import os
@@ -29,10 +29,11 @@ if __name__ == '__main__':
         y = data[:,1]
         z = y/x
         y = y[0]/y
-
+        q = x * y[0]
         plt.figure(2)
         plt.xlabel("Threads")
         plt.ylabel("Speed-up ")
+        plt.plot(x,q,'--',color="gray");
         plt.plot(x,y,'r',marker='x')
         plt.savefig('strong_scaling.pdf')
         plt.figure(3)
@@ -52,6 +53,7 @@ if __name__ == '__main__':
         data = np.array(datapoint)
         x = data[:,0]
         y = data[:,1]
+        q = np.array([x[0] for i in range(len(x))])
 
         plt.plot(x,y,'g',marker='s')
     plt.xlabel("Threads")

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-threads = [1,2,4,8,16,32]  # 1,2,4,
+threads = [1,2,4,8]#,16,32]  # 1,2,4,
 repeats = 10
 graph= 10_000_000#_000# 1_000_000#_000
 if __name__ == '__main__':
@@ -10,7 +10,7 @@ if __name__ == '__main__':
     os.system(cmd)
     import numpy as np
 
-    edges = 3
+    edges = 64
     for a in range(repeats):
         print(f"REPETITION {a}")
         datapoint =list()

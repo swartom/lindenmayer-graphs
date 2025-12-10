@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 threads = [2,4,8,16,32]
-graphs = [  i for i in range(3,9) ]
+graphs = [  i for i in range(3,7) ]
 repeats = 1
 if __name__ == '__main__':
     print("Building Figures for The Discrete graph")
@@ -13,7 +13,7 @@ if __name__ == '__main__':
         print(a)
         datapoint =list()
         for i in graphs:
-            cmd = f"./sf {10 ** i} {4} {a} {0.5}"
+            cmd = f"./sf {10 ** i} {64} {a} {0.5}"
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])

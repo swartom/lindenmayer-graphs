@@ -9,7 +9,7 @@ cmd = "gcc -lcblas -lgsl -O3 -lm -pthread ./scale_free/scale_free.c -o sf"
 os.system(cmd)
 import numpy as np
 keys = []
-threads = [2**(i+5) for i in range(8)]
+threads = [2**(i+5) for i in range(4)]
 graphs = range(2,8)
 options= [ 10**(i) for i in graphs]
 headers = [ f'10^{i}' for i in graphs]

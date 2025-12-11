@@ -38,7 +38,7 @@ for a in edges:
 
             df = pd.DataFrame(array)
 
-            df = df[(np.abs(stats.zscore(df)) < 0.5).all(axis=1)]
+            df = df[(np.abs(stats.zscore(df)) < 1).all(axis=1)]
             array = [float(f) for f in df.to_numpy()]
             print(array)
 

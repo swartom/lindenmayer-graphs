@@ -14,9 +14,9 @@ graphs = range(2,7)
 options= [ 10**(i) for i in graphs]
 headers = [ f'10^{i}' for i in graphs]
 edges=  [2**(i+4) for i in range(4)]
-for a in threads:
+for a in edges:
     print(f"Count: {a}")
-    for edge in edges:
+    for edge in threads:
         print(f"Edges: {edge}")
         datapoint =list()
         for i in options:

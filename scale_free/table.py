@@ -26,7 +26,7 @@ for a in edges:
             total = float(result.split('s')[0])
             sd = float(result.split('s')[1])
             mepe = ((i*a)/total/a)/10**6
-            datapoint.append(f'{ "\\cellcolor{green}\color{white} " if mepe > 27 else "" }${mepe:.2f}Me/PE\\pm {(sd/total)*100:.2f}\\%$')
+            datapoint.append(f'{ "\\cellcolor{green}\\color{white} " if mepe > 27 else "" }${mepe:.2f}Me/PE\\pm {(sd/total)*100:.2f}\\%$')
         key = f'$d={a}$'
         data[key] = datapoint
         keys.append(key)

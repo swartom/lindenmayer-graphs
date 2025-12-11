@@ -9,11 +9,11 @@ cmd = "gcc -lcblas -lgsl -O3 -lm -pthread ./scale_free/scale_free.c -o sf"
 os.system(cmd)
 import numpy as np
 keys = []
-threads = [2**(i+4) for i in range(1)]
-graphs = range(2,7)
+threads = [2**(i+5) for i in range(8)]
+graphs = range(2,8)
 options= [ 10**(i) for i in graphs]
 headers = [ f'10^{i}' for i in graphs]
-edges=  [2**(i+4) for i in range(2)]
+edges=  [2**(i+2) for i in range(4)]
 for a in edges:
     print(f"Count: {a}")
     for edge in threads:

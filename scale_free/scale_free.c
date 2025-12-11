@@ -51,7 +51,8 @@ void* rule( void* p) {
     {
         /* double source = gsl_ran_flat(R, 0.01, 0.99); */
         /* source = gsl_cdf_beta_Pinv(source,.5,1); */
-        double source = gsl_ran_beta(R, ALPHA, 1);
+        /* double source = gsl_ran_beta(R, ALPHA, 1); */
+        double source = gsl_ran_gaussian(R,1);
         /* double source = gsl_ran_gamma(R, 20.0,1.0); */
 
         INTEGER_TYPE x = (A_r.y)*source;
@@ -203,13 +204,14 @@ int main(int argc, char *argv[]) {
     }
 
     double average = total/(double)(REPETITIONS);
-    /* double sum = 0; */
-    /* for (int i = 0; i < REPETITIONS; ++i) */
-    /*     sum += pow(times[i] -average,2); */
-    /* double variance = sum/REPETITIONS; */
-    /* double std_deviation = sqrt(variance); */
+    double sum = 0;
+    for (int i = 0; i < REPETITIONS; ++i)
+        sum += pow(times[i] -average,2);
+    double variance = sum/REPETITIONS;
+    double std_deviation = sqrt(variance);
+
     /* printf("Edges: %d10\n",(MAX*CONNECTIONS)); */
-    printf("%.10fs\n", average);
+    printf("%.10fs%.10f\n", average,std_deviation);
     /* printf("%.2fmE/PE/s",(((double)(MAX*CONNECTIONS)/1000000)/PROCESSORS)/average); */
     return 1;
 }

@@ -1,0 +1,31 @@
+#ifndef MULTI_MODAL_H_
+#define MULTI_MODAL_H_
+
+#include <math.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <gsl/gsl_randist.h>
+#include <gsl/gsl_rng.h>
+#include <stdio.h>
+#include <unistd.h>
+
+int MAX = 1000;
+#define DIVISOR 2
+int CONNECTIONS = 1;
+int THREADS =  64;  // (uint32_t)sysconf(_SC_NPROCESSORS_ONLN) * 8
+#define LIMIT (MAX/(2*THREADS))
+#define REPETITIONS 1
+#define SECONDS_WAIT_BETWEEN_REPEATS 0
+
+// System Info
+#define INTEGER_TYPE uint32_t
+#define SEED 150
+
+double ALPHA = 0.1;
+#define BETA 1.0
+
+#define A 1
+#define C 1
+#define MAX_PERIOD A_r.y
+
+#endif // MULTI_MODAL_H_2

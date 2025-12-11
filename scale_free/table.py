@@ -9,7 +9,7 @@ cmd = "gcc -lcblas -lgsl -O3 -lm -pthread ./scale_free/scale_free.c -o sf"
 os.system(cmd)
 import numpy as np
 keys = []
-threads = [64]
+threads = [32]
 graphs = range(1,7)
 options= [ 10**(i) for i in graphs]
 headers = [ f'10^{i}' for i in graphs]
@@ -25,7 +25,7 @@ for a in edges:
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])
             sd = float(result.split('s')[1])
-            datapoint.append(f'${total*1000:.2f}ms\\pm {(sd/total)*100:.2f}\\%$')
+            datapoint.append(f'${((i*a)/total/a)/10**6:.2f}ms\\pm {(sd/total)*100:.2f}\\%$')
         key = f'$d={a}$'
         data[key] = datapoint
         keys.append(key)

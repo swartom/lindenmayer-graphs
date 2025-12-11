@@ -14,7 +14,7 @@ int MAX = 1000;
 int CONNECTIONS = 1;
 int THREADS =  64;  // (uint32_t)sysconf(_SC_NPROCESSORS_ONLN) * 8
 #define LIMIT (MAX/(2*THREADS))
-#define REPETITIONS 1
+#define REPETITIONS 10
 #define SECONDS_WAIT_BETWEEN_REPEATS 0
 
 // System Info

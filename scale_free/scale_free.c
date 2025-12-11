@@ -52,54 +52,54 @@ void* rule( void* p) {
         /* double source = gsl_ran_flat(R, 0.01, 0.99); */
         /* source = gsl_cdf_beta_Pinv(source,.5,1); */
         double source = gsl_ran_beta(R, ALPHA, 1);
-        /* double source = gsl_ran_gaussian(r,1); */
-        /* double source = gsl_ran_gamma(r, 20.0,1.0); */
+        /* double source = gsl_ran_gaussian(R,1); */
+        /* double source = gsl_ran_gamma(R, 20.0,1.0); */
 
-        integer_type x = (a_r.y)*source;
-        /* integer_type c = x > 1 ? x*source + 1 : 1; // this is only true if the vlaue of connections is greather than x */
+        INTEGER_TYPE x = (A_r.y)*source;
+        /* INTEGER_TYPE c = x > 1 ? x*source + 1 : 1; // This is only true if the vlaue of CONNECTIONS is greather than x */
 
-        for(int i =1; i < connections+1; i++) {
-            elements[i].kind = 'l';
+        for(int i =1; i < CONNECTIONS+1; i++) {
+            elements[i].kind = 'L';
 
-            x = (integer_type)((a)*x + c) % (max_period);
+            x = (INTEGER_TYPE)((A)*x + C) % (MAX_PERIOD);
             elements[i].previous = &elements[i-1];
-            elements[i].x = x + 1; // because we index vertices from 1 not 0
+            elements[i].x = x + 1; // Because we index vertices from 1 not 0
          }
     }
 
-    #define check_m if (m->x != m->y) rule(p);
+    #define check_M if (M->x != M->y) rule(p);
 
-    if (a_r.x != a_r.y){
+    if (A_r.x != A_r.y){
         w wrapper;
-        wrapper.m = &a_r;
+        wrapper.m = &A_r;
 
-        if((a_r.y)-(a_r.x) > (limit) ){
-            /* printf("%d,%d,%d,%d\n",a_r.y,a_r.x, a_r.y - a_r.x,(limit + 1)); */
+        if((A_r.y)-(A_r.x) > (LIMIT) ){
+            /* printf("%d,%d,%d,%d\n",A_r.y,A_r.x, A_r.y - A_r.x,(LIMIT + 1)); */
             pthread_t thread;
             wrapper.r = gsl_rng_alloc (gsl_rng_taus);
-            gsl_rng_set(wrapper.r,seed+a_r.y);
-            pthread_create( &thread, null, rule, &wrapper);
-            check_m
-            pthread_join(thread,null);
+            gsl_rng_set(wrapper.r,SEED+A_r.y);
+            pthread_create( &thread, NULL, rule, &wrapper);
+            check_M
+            pthread_join(thread,NULL);
             gsl_rng_free(wrapper.r);
         } else {
-            wrapper.r = r;
+            wrapper.r = R;
             rule(&wrapper);
-            check_m
+            check_M
         }
-    } else check_m
+    } else check_M
     return 0;
 }
 
 int write_file(module* iv) {
     module* chain = iv;
-    file *fptr;
+    FILE *fptr;
     fptr = fopen("graph.adjlist", "w");
     /* fprintf(fptr, "graph {\nnode[shape=point]"); */
     int test = 0;
     do {
         switch (chain->kind) {
-            case 'a':
+            case 'A':
                 if( test++ == 0)
                     fprintf(fptr, "%d ",chain->x);
                 else
@@ -111,7 +111,7 @@ int write_file(module* iv) {
                 break;
         }
         chain = chain->previous;
-    }while (chain != null);
+    }while (chain != NULL);
     /* fprintf(fptr, "}\n }"); */
     fclose(fptr);
     return 0;
@@ -119,13 +119,13 @@ int write_file(module* iv) {
 
 int write_dot_file(module* iv) {
     module* chain = iv;
-    file *fptr;
+    FILE *fptr;
     fptr = fopen("graph.dot", "w");
     fprintf(fptr, "graph {repulsiveforce=.2\n\nbeautify=false \n \nnode[shape=point,width=.001,color=\"maroon\"]\nedge[penwidth=0.01,color=\"gray\"]");
     int test = 0;
     do {
         switch (chain->kind) {
-            case 'a':
+            case 'A':
                 if( test++ == 0)
 
                     /* fprintf(fptr, "%d ",chain->x); */
@@ -139,7 +139,7 @@ int write_dot_file(module* iv) {
                 break;
         }
         chain = chain->previous;
-    }while (chain != null);
+    }while (chain != NULL);
     fprintf(fptr, "}\n }");
     fclose(fptr);
     return 0;
@@ -149,21 +149,21 @@ int write_dot_file(module* iv) {
 int main(int argc, char *argv[]) {
 
 
-    sscanf(argv[1],"%d", &max);
-    sscanf(argv[2], "%d", &connections);
-    sscanf(argv[3],"%d", &threads);
+    sscanf(argv[1],"%d", &MAX);
+    sscanf(argv[2], "%d", &CONNECTIONS);
+    sscanf(argv[3],"%d", &THREADS);
 
-    sscanf(argv[4], "%lf", &alpha);
+    sscanf(argv[4], "%lf", &ALPHA);
     
     double total = 0.0;
-    double* times = alloca(repetitions*sizeof(double));
-    for(int i = 0; i < repetitions; i ++){
+    double* times = alloca(REPETITIONS*sizeof(double));
+    for(int i = 0; i < REPETITIONS; i ++){
     gsl_rng *rand_src;
     rand_src = gsl_rng_alloc (gsl_rng_taus);
 
-    integer_type max = max;
+    INTEGER_TYPE max = MAX;
     module* iv = (module*)malloc(sizeof(module));
-    iv->kind = 'a';
+    iv->kind = 'A';
     iv->x = 1;
     iv->y = max;
 
@@ -171,28 +171,28 @@ int main(int argc, char *argv[]) {
 
     wrapper.m = iv;
     wrapper.r = rand_src;
-    gsl_rng_set(wrapper.r,seed);
+    gsl_rng_set(wrapper.r,SEED);
 
-    pre_allocation = (module *)malloc((connections + 1)*sizeof(module)*max);
+    pre_allocation = (module *)malloc((CONNECTIONS + 1)*sizeof(module)*MAX);
     
     struct timespec start={0,0}, end={0,0};
-    sleep(seconds_wait_between_repeats);
+    sleep(SECONDS_WAIT_BETWEEN_REPEATS);
 
-    clock_gettime(clock_monotonic, &start);
+    clock_gettime(CLOCK_MONOTONIC, &start);
     rule(&wrapper);
-    clock_gettime(clock_monotonic, &end);
+    clock_gettime(CLOCK_MONOTONIC, &end);
     times[i] = (end.tv_sec + 1.0e-9*end.tv_nsec) - (start.tv_sec + 1.0e-9*start.tv_nsec);
     total += times[i];
     /* printf("%.10fs\n",((end.tv_sec + 1.0e-9*end.tv_nsec) - (start.tv_sec + 1.0e-9*start.tv_nsec))); */
 
-    /* if (repetitions == 1) */
+    /* if (REPETITIONS == 1) */
     /*     write_file(iv); */
 
     /* module* previous = iv; */
     /* do { */
     /*     iv = iv->previous; */
     /*     switch (iv->kind) { */
-    /*         case 'a': */
+    /*         case 'A': */
     /*             free(previous); */
     /*             previous = iv; */
     /*     } */
@@ -203,10 +203,10 @@ int main(int argc, char *argv[]) {
     gsl_rng_free(rand_src);
     }
 
-    double average = total/(double)(repetitions);
+    double average = total/(double)(REPETITIONS);
     /* double tot = times[0]; */
     /* printf("%f\n",tot); */
-    /* for(int i = 0; i < repetitions; ++i){ */
+    /* for(int i = 0; i < REPETITIONS; ++i){ */
     /*     printf("%lf\n",times[i]); */
     /* } */
     /* average = pow(1/REPETITIONS,tot); */

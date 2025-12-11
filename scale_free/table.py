@@ -20,7 +20,7 @@ for a in edges:
         print(f"Edges: {edge}")
         datapoint =list()
         for i in options:
-            cmd = f"./sf {i} {edge} {a} {0.50}"
+            cmd = f"./sf {i} {a} {edge} {0.50}"
             os.system(cmd)
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])

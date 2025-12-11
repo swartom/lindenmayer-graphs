@@ -13,7 +13,7 @@ threads = [32]
 graphs = range(1,9)
 options= [ 10**(i) for i in graphs]
 headers = [ f'10^{i}' for i in graphs]
-edges=  [2**(i) for i in range(8)]
+edges=  [2**(i+1) for i in range(5)]
 for a in edges:
     print(f"Count: {a}")
     for edge in threads:
@@ -35,7 +35,7 @@ texheader = " & $" + "$ & $".join(headers) + "$\\\\"
 texdata = "\\hline\n"
 for label in keys:
     constr = map(str,data[label])
-    const = [ "\cellcolor{red} "+r if float(r) > 27 else r for r in constr]
+    const = [ "\\cellcolor{green} "+r if float(r) > 27 else r for r in constr]
     texdata += f"{label} & {' & '.join(const)} \\\\\n"
 
 

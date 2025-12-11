@@ -10,13 +10,14 @@ os.system(cmd)
 import numpy as np
 keys = []
 threads = [2**(i+6) for i in range(1)]
-graphs = 8
+graphs = 7
 options= [ 10**(i+1) for i in range(1,graphs)]
 headers = [ f'10^{i+1}' for i in range(1,graphs)]
 edges=  [2**(i+1) for i in range(7)]
 for a in threads:
     print(f"Count: {a}")
     for edge in edges:
+        print(f"Edges: {edge}")
         datapoint =list()
         for i in options:
             cmd = f"./sf {i} {edge} {a} {0.50}"

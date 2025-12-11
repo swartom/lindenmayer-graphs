@@ -48,7 +48,7 @@ for a in edges:
 
 
 
-            geo = statistics.geometric_mean(array)
+            geo = statistics.mean(array)
             sd = statistics.stdev(array)
             datapoint.append(f'${geo*1000:.1f}ms\\pm {(sd/geo)*100:.1f}\\% ({len(array)})$')
         key = f'{edge}-{a}'

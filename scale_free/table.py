@@ -25,7 +25,7 @@ for a in edges:
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])
             sd = float(result.split('s')[1])
-            datapoint.append(f'${total:.5f}\\pm {(sd/total)*100:.2f}\\%$')
+            datapoint.append(f'${total*1000:.5f}\\pm {(sd/total)*100:.2f}\\%$')
         key = f'{edge}-{a}'
         data[key] = datapoint
         keys.append(key)

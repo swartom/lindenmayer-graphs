@@ -10,7 +10,7 @@ os.system(cmd)
 import numpy as np
 keys = []
 threads = [32]
-graphs = range(3,9)
+graphs = range(3,7)
 options= [ 10**(i) for i in graphs]
 headers = [ f'10^{i}' for i in graphs]
 edges=  [2**(i+1) for i in range(6)]

@@ -34,7 +34,9 @@ textabular = f"r||{'r'*len(headers)}"
 texheader = " & $" + "$ & $".join(headers) + "$\\\\"
 texdata = "\\hline\n"
 for label in keys:
-    texdata += f"{label} & {' & '.join(map(str,data[label]))} \\\\\n"
+    constr = map(str,data[label])
+    const = [ "\cellcolor{red} "+r if float(r) > 27 else r for r in constr]
+    texdata += f"{label} & {' & '.join(const)} \\\\\n"
 
 
 print("\\begin{tabular}{"+textabular+"}")

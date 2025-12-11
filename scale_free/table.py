@@ -9,11 +9,11 @@ cmd = "gcc -lcblas -lgsl -O3 -lm -pthread ./scale_free/scale_free.c -o sf"
 os.system(cmd)
 import numpy as np
 keys = []
-threads = [2**(i+4) for i in range(5)]
+threads = [2**(i+4) for i in range(1)]
 graphs = range(2,7)
 options= [ 10**(i) for i in graphs]
 headers = [ f'10^{i}' for i in graphs]
-edges=  [2**(i+4) for i in range(4)]
+edges=  [2**(i+4) for i in range(2)]
 for a in edges:
     print(f"Count: {a}")
     for edge in threads:
@@ -23,9 +23,34 @@ for a in edges:
             cmd = f"./sf {i} {edge} {a} {0.50}"
             os.system(cmd)
             result = os.popen(cmd).read()
-            total = float(result.split('s')[0])
-            sd = float(result.split('s')[1])
-            datapoint.append(f'${total*1000:.5f}\\pm {(sd/total)*100:.2f}\\%$')
+
+
+            result =  result.split("\n")
+            from scipy import stats
+
+            import statistics
+            import pandas as pd
+
+            array = [float(r) for r in result if r != "" ]
+            import pandas as pd
+            import numpy as np
+            from scipy import stats
+
+            df = pd.DataFrame(array)
+
+            df = df[(np.abs(stats.zscore(df)) < 1).all(axis=1)]
+            array = [float(f) for f in df.to_numpy()]
+            print(array)
+
+
+            # df = pd.DataFrame(data)
+            # df[(np.abs(stats.zscore(df)) < 3).all(axis=1)]
+
+
+
+            geo = statistics.geometric_mean(array)
+            sd = statistics.stdev(array)
+            datapoint.append(f'${geo*1000:.2f}ms\\pm {(sd/geo)*100:.2f}\\%$')
         key = f'{edge}-{a}'
         data[key] = datapoint
         keys.append(key)

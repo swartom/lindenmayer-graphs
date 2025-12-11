@@ -206,10 +206,9 @@ int main(int argc, char *argv[]) {
     double average = total/(double)(REPETITIONS);
     /* double tot = times[0]; */
     /* printf("%f\n",tot); */
-    /* for(int i = 1; i < REPETITIONS; ++i){ */
-    /*     tot *=  times[i]; */
-    /*     printf("%lf\n",tot); */
-    /* } */
+    for(int i = 0; i < REPETITIONS; ++i){
+        printf("%lf\n",times[i]);
+    }
     /* average = pow(1/REPETITIONS,tot); */
     double sum = 0;
     for (int i = 0; i < REPETITIONS; ++i)
@@ -218,7 +217,7 @@ int main(int argc, char *argv[]) {
     double std_deviation = sqrt(variance);
 
     /* printf("Edges: %d10\n",(MAX*CONNECTIONS)); */
-    printf("%.10fs%.10f\n", average,std_deviation);
+    /* printf("%.10fs%.10f\n", average,std_deviation); */
     /* printf("%.2fmE/PE/s",(((double)(MAX*CONNECTIONS)/1000000)/PROCESSORS)/average); */
     return 1;
 }

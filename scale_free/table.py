@@ -25,7 +25,7 @@ for a in edges:
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])
             sd = float(result.split('s')[1])
-            mepe = ((i*a)/total/a)/10**6
+            mepe = ((i*a)/total/edge)/10**6
             datapoint.append(f'{ "\\cellcolor{green}\\color{white} " if mepe > 27.65 else "" }${mepe:.1f}\\pm {(sd/total)*100:.2f}\\%$')
         key = f'$d={a}$'
         data[key] = datapoint

@@ -204,6 +204,13 @@ int main(int argc, char *argv[]) {
     }
 
     double average = total/(double)(REPETITIONS);
+    /* double tot = times[0]; */
+    /* printf("%f\n",tot); */
+    /* for(int i = 1; i < REPETITIONS; ++i){ */
+    /*     tot *=  times[i]; */
+    /*     printf("%lf\n",tot); */
+    /* } */
+    /* average = pow(1/REPETITIONS,tot); */
     double sum = 0;
     for (int i = 0; i < REPETITIONS; ++i)
         sum += pow(times[i] -average,2);

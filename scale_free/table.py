@@ -10,7 +10,7 @@ os.system(cmd)
 import numpy as np
 keys = []
 threads = [32]
-graphs = range(1,7)
+graphs = range(1,9)
 options= [ 10**(i) for i in graphs]
 headers = [ f'10^{i}' for i in graphs]
 edges=  [2**(i) for i in range(8)]
@@ -25,7 +25,7 @@ for a in edges:
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])
             sd = float(result.split('s')[1])
-            datapoint.append(f'${((i*a)/total/a)/10**6:.2f}ms\\pm {(sd/total)*100:.2f}\\%$')
+            datapoint.append(f'${((i*a)/total/a)/10**6:.2f}ME/PU\\pm {(sd/total)*100:.2f}\\%$')
         key = f'$d={a}$'
         data[key] = datapoint
         keys.append(key)

@@ -25,7 +25,8 @@ for a in edges:
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])
             sd = float(result.split('s')[1])
-            datapoint.append(f'${((i*a)/total/a)/10**6:.2f}ME/PU\\pm {(sd/total)*100:.2f}\\%$')
+            mepe = ((i*a)/total/a)/10**6
+            datapoint.append(f'{ "\\cellcolor{green} " if mepe > 27 else "" }${mepe:.2f}ME/PU\\pm {(sd/total)*100:.2f}\\%$')
         key = f'$d={a}$'
         data[key] = datapoint
         keys.append(key)
@@ -34,8 +35,7 @@ textabular = f"r||{'r'*len(headers)}"
 texheader = " & $" + "$ & $".join(headers) + "$\\\\"
 texdata = "\\hline\n"
 for label in keys:
-    constr = map(str,data[label])
-    const = [ "\\cellcolor{green} "+r if float(r) > 27 else r for r in constr]
+    const = map(str,data[label])
     texdata += f"{label} & {' & '.join(const)} \\\\\n"
 
 

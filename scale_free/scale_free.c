@@ -49,9 +49,9 @@ void* rule( void* p) {
     M->x = A_r.y + 1;
 
     {
-        /* double source = gsl_ran_flat(R, 0.01, 0.99); */
-        /* source = gsl_cdf_beta_Pinv(source,.5,1); */
-        double source = gsl_ran_beta(R, ALPHA, 1);
+        double source = gsl_ran_flat(R, 0.01, 0.99);
+        source = gsl_cdf_beta_Pinv(source,.5,1);
+        /* double source = gsl_ran_beta(R, ALPHA, 1); */
         /* double source = gsl_ran_gaussian(R,1); */
         /* double source = gsl_ran_gamma(R, 20.0,1.0); */
 

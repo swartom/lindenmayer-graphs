@@ -9,11 +9,11 @@ cmd = "gcc -lcblas -lgsl -O3 -lm -pthread ./scale_free/scale_free.c -o sf"
 os.system(cmd)
 import numpy as np
 keys = []
-threads = [2**(i+5) for i in range(6)]
-graphs = 6
-options= [ 10**(i+1) for i in range(2,graphs)]
-headers = [ f'10^{i+1}' for i in range(2,graphs)]
-edges=  [2**(i+1) for i in range(8)]
+threads = [2**(i+3) for i in range(4)]
+graphs = range(2,7)
+options= [ 10**(i) for i in graphs]
+headers = [ f'10^{i}' for i in graphs]
+edges=  [2**(i+4) for i in range(4)]
 for a in threads:
     print(f"Count: {a}")
     for edge in edges:
@@ -25,12 +25,12 @@ for a in threads:
             result = os.popen(cmd).read()
             total = float(result.split('s')[0])
             sd = float(result.split('s')[1])
-            datapoint.append(f'${total:.5f}\\pm {(sd/total)*100:.2f}$')
+            datapoint.append(f'${total:.5f}\\pm {(sd/total)*100:.2f}\\%$')
         key = f'{edge}-{a}'
         data[key] = datapoint
         keys.append(key)
 
-textabular = f"l|{'r'*len(headers)}"
+textabular = f"r||{'r'*len(headers)}"
 texheader = " & $" + "$ & $".join(headers) + "$\\\\"
 texdata = "\\hline\n"
 for label in keys:

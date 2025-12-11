@@ -38,7 +38,7 @@ for a in edges:
 
             df = pd.DataFrame(array)
 
-            df = df[(np.abs(stats.zscore(df)) < 1).all(axis=1)]
+            df = df[(np.abs(stats.zscore(df)) < 0.5).all(axis=1)]
             array = [float(f) for f in df.to_numpy()]
             print(array)
 
@@ -50,7 +50,7 @@ for a in edges:
 
             geo = statistics.geometric_mean(array)
             sd = statistics.stdev(array)
-            datapoint.append(f'${geo*1000:.2f}ms\\pm {(sd/geo)*100:.2f}\\%$')
+            datapoint.append(f'${geo*1000:.1f}ms\\pm {(sd/geo)*100:.1f}\\% ({len(array)})$')
         key = f'{edge}-{a}'
         data[key] = datapoint
         keys.append(key)

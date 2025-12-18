@@ -29,7 +29,6 @@ void* rule( void* p) {
         double r = get_random();
         int k = ((log(r)/c) - 1.0);
 
-
         i += k + 1;
         if(i < A_r.y+1){
             elements[counter].kind = 'L';

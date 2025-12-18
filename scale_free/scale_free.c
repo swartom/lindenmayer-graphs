@@ -53,6 +53,7 @@ void* rule( void* p) {
         /* source = gsl_cdf_beta_Pinv(source,.5,1); */
         double source = gsl_ran_pareto(R, 0.5, 1);
         source = 1/source;
+
         /* double source = gsl_ran_gaussian(R,1); */
         /* double source = gsl_ran_gamma(R, 20.0,1.0); */
 

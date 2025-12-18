@@ -51,7 +51,8 @@ void* rule( void* p) {
     {
         /* double source = gsl_ran_flat(R, 0.01, 0.99); */
         /* source = gsl_cdf_beta_Pinv(source,.5,1); */
-        double source = gsl_ran_beta(R, 0.5, 1);
+        double source = gsl_ran_pareto(R, 0.5, 1);
+        source = 1/source;
         /* double source = gsl_ran_gaussian(R,1); */
         /* double source = gsl_ran_gamma(R, 20.0,1.0); */
 
@@ -185,8 +186,8 @@ int main(int argc, char *argv[]) {
     total += times[i];
     /* printf("%.10fs\n",((end.tv_sec + 1.0e-9*end.tv_nsec) - (start.tv_sec + 1.0e-9*start.tv_nsec))); */
 
-    /* if (REPETITIONS == 1) */
-    /*     write_file(iv); */
+    if (REPETITIONS == 1)
+        write_file(iv);
 
     /* module* previous = iv; */
     /* do { */

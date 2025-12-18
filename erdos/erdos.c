@@ -109,7 +109,7 @@ int main(int argc, char *argv[]) {
     rule(iv);
     clock_gettime(CLOCK_MONOTONIC, &end);
 
-    /* write_file(iv); */
+    write_file(iv);
     printf("%.10fms\n",((end.tv_sec + 1.0e-9*end.tv_nsec) - (start.tv_sec + 1.0e-9*start.tv_nsec))*1000);
     printf("c=%lf \n",c);
     free(pre_alloc);

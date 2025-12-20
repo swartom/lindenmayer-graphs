@@ -7,26 +7,34 @@ double P = 0.01;
 #define LIMIT (MAX/((1.5)*THREADS))
 #define THREADS 32
 
+#define SEED 100
+
+typedef struct wrapper {
+    module* m;
+    gsl_rng* r;
+} w;
+
 
 double c = 0;
 module * restrict pre_alloc;
 double get_random() { return (double)rand() / (double)RAND_MAX; }
 void* rule( void* p) {
-    module * m = (module*)p;
-    uint32_t mid  = 3*((m->y) - (m->x))/4 + m->x; // r-1
+    #define M ((w *)p)->m
+    #define R ((w *)p)->r
+    uint32_t mid  = 3*((M->y) - (M->x))/4 + M->x; // r-1
 
     module* elements = (module*) &pre_alloc[(mid)*(MAX)];
 
     #define A_r elements[0]
 
     A_r.kind = 'A';
-    A_r.x = m->x;
+    A_r.x = M->x;
     A_r.y = mid;
-    A_r.previous = m->previous;
+    A_r.previous = M->previous;
 
     INTEGER_TYPE counter = 1;
     for (size_t i =1;i < A_r.y+1;) {
-        double r = get_random();
+        double r = gsl_ran_flat(R, 0.01, 0.99);
         int k = ((log(r)/c) - 1.0);
 
         i += k + 1;
@@ -37,24 +45,29 @@ void* rule( void* p) {
             counter+=1;
         }
     }
-    m->previous = &elements[counter-1] ;
-    m->x = A_r.y +1;
+    M->previous = &elements[counter-1] ;
+    M->x = A_r.y +1;
 
     if(A_r.y != A_r.x){
+        w wrapper;
+        wrapper.m = &A_r;
         if((A_r.y)-(A_r.x) > (LIMIT) ){
             pthread_t thread;
-            pthread_create( &thread, NULL, rule, &A_r);
-            if(m->x != m->y)
-                rule(m);
+            wrapper.r = gsl_rng_alloc (gsl_rng_taus);
+            gsl_rng_set(wrapper.r,SEED+A_r.y);
+            pthread_create( &thread, NULL, rule, &wrapper);
+            if(M->x != M->y)
+                rule(p);
             pthread_join(thread,NULL);
-
+            gsl_rng_free(wrapper.r);
         } else {
-        rule(&A_r);
-        if(m->x != m->y)
-            rule(m);
+        wrapper.r = R;
+        rule(&wrapper);
+        if(M->x != M->y)
+            rule(p);
     } }else{
-        if(m->x != m->y)
-          rule(m);
+        if(M->x != M->y)
+          rule(p);
     }
 }
 
@@ -65,7 +78,6 @@ int write_file(module* iv) {
     /* fprintf(fptr, "graph {\nnode[shape=point]"); */
     int test = 0;
     do {
-
         switch (chain->kind) {
             case 'A':
                 /* printf("\n"); */
@@ -101,14 +113,18 @@ int main(int argc, char *argv[]) {
     iv->x = 1;
     iv->y = max;
 
+    gsl_rng *rand_src;
+    rand_src = gsl_rng_alloc (gsl_rng_taus);
 
+    w wrapper;
+    wrapper.m = iv;
+    wrapper.r = rand_src;
+    gsl_rng_set(wrapper.r,SEED);
     struct timespec start={0,0}, end={0,0};
-
-
     clock_gettime(CLOCK_MONOTONIC, &start);
-    rule(iv);
+    rule(&wrapper);
     clock_gettime(CLOCK_MONOTONIC, &end);
-
+    gsl_rng_free(rand_src);
     /* write_file(iv); */
     printf("%.10fs\n",((end.tv_sec + 1.0e-9*end.tv_nsec) - (start.tv_sec + 1.0e-9*start.tv_nsec)));
     /* printf("c=%lf \n",c); */

@@ -4,7 +4,7 @@
 int MAX = 0;
 double P = 0.01;
 
-#define LIMIT (MAX/((1.5)*THREADS))
+#define LIMIT (MAX/((2)*THREADS))
 #define THREADS 32
 
 
@@ -13,7 +13,7 @@ module * restrict pre_alloc;
 double get_random() { return (double)rand() / (double)RAND_MAX; }
 void* rule( void* p) {
     module * m = (module*)p;
-    uint32_t mid  = 3*((m->y) - (m->x))/4 + m->x; // r-1
+    uint32_t mid  = 1*((m->y) - (m->x))/2 + m->x; // r-1
 
     module* elements = (module*) &pre_alloc[(mid)*(MAX)];
 

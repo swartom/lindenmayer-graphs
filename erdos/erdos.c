@@ -34,10 +34,10 @@ void* rule( void* p) {
 
     INTEGER_TYPE counter = 1;
     for (size_t i =1;i < A_r.y+1;) {
-        double r = gsl_ran_flat(R, 0.01, 0.99);
+        double r = gsl_ran_flat(R, 0, 1);
         int k = ((log(r)/c) - 1.0);
 
-        i += k + 1;
+        i += k;
         if(i < A_r.y+1){
             elements[counter].kind = 'L';
             elements[counter].x = i;
@@ -125,7 +125,7 @@ int main(int argc, char *argv[]) {
     rule(&wrapper);
     clock_gettime(CLOCK_MONOTONIC, &end);
     gsl_rng_free(rand_src);
-    /* write_file(iv); */
+    write_file(iv);
     printf("%.10fs\n",((end.tv_sec + 1.0e-9*end.tv_nsec) - (start.tv_sec + 1.0e-9*start.tv_nsec)));
     /* printf("c=%lf \n",c); */
     free(pre_alloc);

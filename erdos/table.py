@@ -22,7 +22,7 @@ for a in edges:
 
         for i in options:
             cmd = f"taskset -c 0-{edge-1} ./er {i} {a} "
-            total += 0
+            total = 0
             for _ in range(10):
                 os.system(cmd)
                 result = os.popen(cmd).read()

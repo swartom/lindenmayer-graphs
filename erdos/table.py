@@ -13,7 +13,7 @@ threads = [1,2,8,16,32]
 graphs = range(1,5)
 options= [ 10**(i) for i in graphs]
 headers = [ f'10^{i}' for i in graphs]
-edges=  [0.001]
+edges=  [0.001,0.01,0.1]
 for a in edges:
     print(f"Count: {a}")
     for edge in threads:

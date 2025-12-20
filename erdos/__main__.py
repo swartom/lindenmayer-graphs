@@ -25,7 +25,7 @@ for p in probabilites:
             cmd = f"./er {n} {p}"
             os.system(cmd)
             result = os.popen(cmd).read()
-            total = float(result.split('ms')[0])
+            total = float(result.split('s')[0])
 
             datapoint.append((n,total))
 

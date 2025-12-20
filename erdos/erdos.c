@@ -5,7 +5,7 @@ int MAX = 0;
 double P = 0.01;
 
 #define LIMIT (MAX/((1.5)*THREADS))
-#define THREADS 1
+#define THREADS 32
 
 
 double c = 0;
@@ -109,9 +109,9 @@ int main(int argc, char *argv[]) {
     rule(iv);
     clock_gettime(CLOCK_MONOTONIC, &end);
 
-    write_file(iv);
-    printf("%.10fms\n",((end.tv_sec + 1.0e-9*end.tv_nsec) - (start.tv_sec + 1.0e-9*start.tv_nsec))*1000);
-    printf("c=%lf \n",c);
+    /* write_file(iv); */
+    printf("%.10fs\n",((end.tv_sec + 1.0e-9*end.tv_nsec) - (start.tv_sec + 1.0e-9*start.tv_nsec)));
+    /* printf("c=%lf \n",c); */
     free(pre_alloc);
     free(iv);
 }

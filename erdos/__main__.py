@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 cmd = "gcc -lcblas -lgsl -O3 -lm -pthread ./erdos/erdos.c -o er"
 os.system(cmd)
 ls= [ 10**i for i in range(1,5)]
-ls = [ a*b for b in range(1,10) for a in ls  if a*b <= 7*10**4]
+ls = [ a*b for b in range(1,10) for a in ls  if a*b <= 5*10**4]
 probabilites = [0.001,0.01]
 fig, da = plt.subplots(1,2)
 i = 0

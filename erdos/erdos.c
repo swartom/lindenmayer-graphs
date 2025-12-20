@@ -5,7 +5,7 @@ int MAX = 0;
 double P = 0.01;
 
 #define LIMIT (MAX/((1.5)*THREADS))
-#define THREADS 32
+#define THREADS 1
 
 
 double c = 0;

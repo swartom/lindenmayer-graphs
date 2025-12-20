@@ -9,11 +9,11 @@ cmd = "gcc -lcblas -lgsl -O3 -lm -pthread ./erdos/erdos.c -o er"
 os.system(cmd)
 import numpy as np
 keys = []
-threads = [1,2,8,16,32]
-graphs = range(1,5)
+threads = [2,4,8,16,32]
+graphs = range(1,4)
 options= [ 10**(i) for i in graphs]
 headers = [ f'10^{i}' for i in graphs]
-edges=  [0.001,0.01,0.1]
+edges=  [0.1,0.25,0.5,0.75,1]
 for a in edges:
     print(f"Count: {a}")
     for edge in threads:

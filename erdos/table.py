@@ -19,12 +19,15 @@ for a in edges:
     for edge in threads:
         print(f"Edges: {edge}")
         datapoint =list()
+
         for i in options:
             cmd = f"taskset -c 0-{edge-1} ./er {i} {a} "
-            os.system(cmd)
-            result = os.popen(cmd).read()
-            total = float(result.split('s')[0])*1000
-            datapoint.append(f'${total:.2f}ms$')
+            total += 0
+            for _ in range(10):
+                os.system(cmd)
+                result = os.popen(cmd).read()
+                total += float(result.split('s')[0])*1000
+            datapoint.append(f'${(total/10):.2f}ms$')
         key = f'$c=0-{edge-1},d={a}$'
         data[key] = datapoint
         keys.append(key)
